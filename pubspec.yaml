@@ -1,8 +1,9 @@
 name: screenshot_modes
-description: easy automatics way for take screenshot for your app , screenshot mode  work as plugin for device_preview package
+description: Easy and automatic way to take screenshots of your app, screenshot mode works as a plugin for device_preview package.
 version: 1.0.1
 repository: https://github.com/Ali1Ammar/screenshot_modes
 homepage: https://github.com/Ali1Ammar/screenshot_modes
+publish_to: "none" # Currently required because device_preview is not up to date and a git version is used.
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -10,7 +11,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  device_preview: ^1.1.0
+  # device_preview: ^1.1.0
+  # Upgraded version of device_preview
+  device_preview:
+    git:
+      url: https://github.com/RuslanTsitser/flutter_device_preview.git
+      path: device_preview
 
   provider: ^6.1.2
   platform: ^3.1.4
