@@ -10,8 +10,7 @@ typedef AyncCallbackContext = Future<void> Function(BuildContext context);
 /// An instance should be provided the the [plugins] constructor property of
 /// a [DevicePreview].
 class ScreenShotModesPlugin extends StatelessWidget {
-  const ScreenShotModesPlugin(
-      {required this.processor, required this.modes, this.onEnd});
+  const ScreenShotModesPlugin({required this.processor, required this.modes, this.onEnd});
 
   /// A screenshot that processes a screenshot and returns the result as a display message.
   ///you must use to save image or uploaded to internet ...
@@ -76,13 +75,11 @@ class _ScreenshotState extends State<_Screenshot> {
     });
   }
 
-  Future<void> _takeScreen(
-      List<ItemScreenMode> modes, List<Object> label) async {
+  Future<void> _takeScreen(List<ItemScreenMode> modes, List<Object> label) async {
     for (final mode in modes) {
       await mode.function?.call(context);
       if (mode.modes != null) {
-        await _takeScreen(
-            mode.modes!, [...label, if (mode.label != null) mode.label!]);
+        await _takeScreen(mode.modes!, [...label, if (mode.label != null) mode.label!]);
       } else {
         await Future.delayed(Duration(milliseconds: 400));
         await _take([...label, if (mode.label != null) mode.label!]);
@@ -95,8 +92,7 @@ class _ScreenshotState extends State<_Screenshot> {
     try {
       final screenshot = await DevicePreview.screenshot(context);
 
-      final link =
-          await widget.processor(DeviceScreenshotWithLabel(label, screenshot));
+      final link = await widget.processor(DeviceScreenshotWithLabel(label, screenshot));
       setState(() {
         this.link.add(link);
       });
@@ -129,16 +125,12 @@ class _ScreenshotState extends State<_Screenshot> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "screenshot mode",
-                    style: theme.textTheme.subtitle2?.copyWith(
+                    "Screenshot mode",
+                    style: theme.textTheme.titleSmall?.copyWith(
                       color: theme.hintColor,
                     ),
                   ),
-                  isLoading
-                      ? CircularProgressIndicator()
-                      : OutlinedButton(
-                          onPressed: pressTake,
-                          child: Text(isLoading ? "Re Take" : "Take")),
+                  isLoading ? CircularProgressIndicator() : OutlinedButton(onPressed: pressTake, child: Text(isLoading ? "Retake" : "Take")),
                   if (!isLoading && link.isNotEmpty)
                     IconButton(
                         onPressed: () {
